@@ -65,6 +65,6 @@ exécuter des requêtes HTTP simples vers une URL indiquée.
 ### Ca se complique... pour encore mieux simplifier
 L'exercice simple est effectué. On le complique en ajoutant une couche d'authentication basic en Base 64 et en y 
 ajoutant les méthodes d'appels. Bizarre, ça ressemble exactement aux appels que l'on doit effectuer pour appeler l'API 
-Pastell
+Pastell.
 
 ### Un service ? Qu'est-ce que c'est ?
