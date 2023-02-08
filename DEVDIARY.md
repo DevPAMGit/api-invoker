@@ -45,7 +45,7 @@ précise. Et surtout par avoir peur d'essayer, de se planter et de faire mieux.
 * Étudier le fonctionnement d'un programme et de l'adapter à ses besoins, ce qui passe par l'accès aux codes sources ;
 * La liberté de redistribuer des copies ;
 * **L'obligation de faire bénéficier la communauté des versions modifiées.** (Hé oui amis de la prestation de service et
-  du privé, il faut faire tourner la roue, quand tu prends il faut aussi donner sinon malheur à toi).
+  du privé, il faut faire tourner la roue, quand tu prends il faut aussi donner).
 
 ## DAY ONE: 2023-02-07
 ### Why this... ?
