@@ -65,6 +65,10 @@ exécuter des requêtes HTTP simples vers une URL indiquée.
 ### Ca se complique... pour encore mieux simplifier
 L'exercice simple est effectué. On le complique en ajoutant une couche d'authentication basic en Base 64 et en y 
 ajoutant les méthodes d'appels. Bizarre, ça ressemble exactement aux appels que l'on doit effectuer pour appeler l'API 
-Pastell.
+Pastell. Ces classes sont disponibles dans le package <code>baobab.librairies.requete.authentifie.base64</code>.
 
 ### Un service ? Qu'est-ce que c'est ?
+Mise en place d'une interface de service qui est en fait une requête déguisée accédant à une ressource de l'hôte sur 
+lequel l'on se connecte. Cette interface est disponible dans le package 
+<code>baobab.librairies.requete.service</code>. Les nouveaux services devront implémenter l'interface *IService* et par 
+extension l'interface *IRequeteHTTP*.
