@@ -1,6 +1,6 @@
 # API Invoker
 
-Ce projet est sous licence GNU-GPL, c'est-à-dire que vous pouvez :**
+**Ce projet est sous licence GNU-GPL, c'est-à-dire que vous pouvez :**
 * Exécuter le logiciel, pour n'importe quel usage ;
 * Étudier le fonctionnement d'un programme et de l'adapter à ses besoins, ce qui passe par l'accès aux codes sources ;
 * La liberté de redistribuer des copies ;
