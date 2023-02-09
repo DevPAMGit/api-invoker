@@ -72,3 +72,28 @@ Mise en place d'une interface de service qui est en fait une requête déguisée
 lequel l'on se connecte. Cette interface est disponible dans le package 
 <code>baobab.librairies.requete.service</code>. Les nouveaux services devront implémenter l'interface *IService* et par 
 extension l'interface *IRequeteHTTP*.
+
+## DAY TWO: 2023-02-08
+### Tests Unitaires !!!!!
+Comme le dit l'adage "Après l'effort, les tests !" :D :D ! 
+
+Nan je déconne. Quand tout est fini rien ne l'est. Comme tout bon développeur, il faut éprouver la solution avec :
+DES TESTS UNITAIRES !!!!! (au moins pour s'assurer qu'elle fasse ce que l'on veut qu'elle fasse).
+
+### Problèmes !
+J'avais écrit ma librairie utilisant la librairie de base de JAVA, c'est-à-dire la classe 
+<code>java.net.HttpURLConnection</code>. Mais il s'avère que celle-ci ne permet que de faire appel à des requêtes de 
+type <code>GET</code> et <code>POST</code> °_°'... Se faisant mes tests bloquent lorsque je fais un appel exotique 
+(PATCH, DELETE, classique quoi...). Aucun moyen de régler ce problème sauf en "hackant" la classe 
+<code>HttpURLConnection</code> en y modifiant la liste des méthodes voulues.
+
+Je tente la modification et là.... gros WARNING ! 
+Mon compileur voit que je tente quelques chose de quand même bien sale (mais ça marche -_-...) m'indiquant que ce genre 
+de pratique ne sera pas maintenu dans les versions ultérieures. En gros, ma librairie a déjà une date de péremption sans 
+même avoir été livré :D ! Mais heureusement, Java depuis la version 11 a mis à disposition une seconde librairie 
+<code>java.net.http.HttpRequest</code> mais dois-je retaper tout mon code -_- ? NOOOOOON ! Action/Réaction, j'adapte 
+la librairie à l'utilisation de la mienne MWHAHAHAHAHAHAH !
+
+## DAY THREE: 2023-02-29
+### The end !
+Librairie terminée ! Job done :D.
