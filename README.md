@@ -17,7 +17,13 @@ Cette librairie à pour objectif de remplir des appels spécifiques dans le cadr
 aujourd'hui elle ne prend pas tous les cas de figure, elle remplit sa mission et tendra à évoluer selon mes besoins.
 
 ## Architecture de la librairie
-TODO
+La librairie est définie comme il suit sur le diagramme de classe ci-dessous :
+![image](./resources/img.png "Diagramme de classe de la librairie.")
+
+Pour ajouter un service, il vous suffit d'étendre sur le type de requête voulut (POST, GET, ...) et implémenter 
+l'interface <code>IService</code>. Il vous suffit juste ensuite d'implémenter les méthodes <code>getRessource</code> et
+<code>appeler</code>.
+![image](./resources/img_1.png "Diagramme de classe d'un nouveau service")
 
 ## Tests Unitaires
 Pour vérifier le bon fonctionnement de la librairie, celle-ci est livrée avec des tests unitaires. Ces tests sont 
