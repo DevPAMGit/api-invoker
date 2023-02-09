@@ -148,3 +148,6 @@ buildNumber.properties
 .classpath
 
 # End of https://www.toptal.com/developers/gitignore/api/intellij,java,maven
+
+/src/test/java/baobab/libraries/service/composant/VariablesStatiques.java
+/src/test/resources/file_to_transfert.pdf
