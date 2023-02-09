@@ -11,5 +11,5 @@ public interface IRequeteHTTP {
      * @throws IOException          Si une exception d'entrée/sortie se produit.
      * @throws RequeteHTTPException Si une exception spécifique à l'utilisation de la librairie a lieu.
      */
-    String appeler() throws IOException, RequeteHTTPException;
+    String appeler() throws IOException, RequeteHTTPException, InterruptedException;
 }

@@ -2,20 +2,29 @@ package baobab.libraries.requete.noyau;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
+import java.net.URI;
 import java.util.HashMap;
+import java.io.IOException;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
 
 /** Classer permettant d'effectuer des requête HTTP vers un hote distant. */
 public abstract class RequeteHTTP implements IRequeteHTTP {
     /**
      * Instance de connexion vers l'URL de la requête.
      */
-    protected final HttpURLConnection connexion;
+    protected HttpRequest.Builder connexion;
+
+    /**
+     * La requête envoyée à l'hôte.
+     */
+    private HttpRequest requete;
+
+    /**
+     * La méthode de la requête.
+     */
+    protected final MethodeHTTP methode;
 
     /**
      * Liste des données à intégrer dans la requête.
@@ -24,71 +33,48 @@ public abstract class RequeteHTTP implements IRequeteHTTP {
 
     /**
      * Initialise une nouvelle instance de la classe {@link RequeteHTTP}.
-     * @param methode                           La méthode de la requête HTTP.
-     * @param url                               L'URL sur laquelle se connecter.
-     * @throws java.net.MalformedURLException   Si aucun protocole n'est spécifié, ou si un protocole inconnu est trouvé,
-     *                                          ou si la spécification est nulle, ou si l'URL analysée ne respecte pas
-     *                                          la syntaxe spécifique du protocole associé.
-     * @throws java.net.ProtocolException       Si la méthode ne peut pas être réinitialisée ou si la méthode demandée
-     *                                          n'est pas valide pour HTTP.
-     * @throws SecurityException                Si un gestionnaire de sécurité est défini et que la méthode est "TRACE",
-     *                                          mais que la NetPermission "allowHttpTrace" n'est pas accordée.
-     * @throws IOException                      si une exception d'E/S se produit.
+     * @param methode La méthode de la requête HTTP.
+     * @param url     L'URL sur laquelle se connecter.
      */
-    public RequeteHTTP(@NotNull MethodeHTTP methode, @NotNull String url) throws IOException {
-        this.connexion = (HttpURLConnection) new URL(url).openConnection();
-        this.connexion.setRequestMethod(methode.nom);
+    public RequeteHTTP(@NotNull MethodeHTTP methode, @NotNull String url) {
+        this.connexion = HttpRequest.newBuilder(URI.create(url));
         this.donnees = new HashMap<>();
+        this.methode = methode;
+        this.requete = null;
     }
 
     /**
      * Ajoute un entête à la requête.
-     * @param cle                       La clé de la requête.
-     * @param valeur                    La valeur de la requête.
-     * @throws IllegalStateException    Si l'instance est déjà connectée.
-     * @throws NullPointerException     Si la clé est null.
+     * @param cle    La clé de la requête.
+     * @param valeur La valeur de la requête.
      */
     protected void setEnTete(@NotNull String cle, @NotNull String valeur) {
-        this.connexion.setRequestProperty(cle, valeur);
+        this.connexion = this.connexion.header(cle, valeur);
     }
 
     /**
      * Méthode permettant d'envoyer des données sur l'hôte de connexion.
-     * @throws IOException  Si une exception d'entrée/sortie se produit.
      * @throws RequeteHTTPException Si une exception spécifique à l'utilisation de la librairie a lieu.
      */
-    protected void envoyer() throws IOException, RequeteHTTPException {
+    protected void envoyer() throws RequeteHTTPException {
+        // Récupération du corps de la requête.
         byte[] corps = this.getCorps();
-        OutputStream fluxSortie;
 
-        if(corps == null || corps.length == 0) return;
+        // Écriture du corps de la requête.
+        if(corps != null && corps.length > 0)
+            this.connexion = this.connexion.method(this.methode.nom, HttpRequest.BodyPublishers.ofByteArray(corps));
 
-        this.connexion.setDoOutput(true);
-        fluxSortie = this.connexion.getOutputStream();
-        fluxSortie.write(corps);
-
-        fluxSortie.flush();
-        fluxSortie.close();
+        // Envoi/Execution de la requête.
+        this.requete = this.connexion.build();
     }
 
     /**
-     * Méthode permettant de récupérer des données retournées par l'hôte.
-     * @return              Les données retournées par l'hôte en chaîne de caractères.
+     * Méthode permettant de récupérer des données retournées par l'hôte au format {@link String}.
+     * @return             Les données retournées par l'hôte au format {@link String}.
      * @throws IOException Si une exception d'entrée/sortie se produit.
      */
-    protected String recevoir() throws IOException {
-        BufferedReader lecteur;
-
-        try{ lecteur = new BufferedReader(new InputStreamReader(this.connexion.getInputStream())); }
-        catch (IOException e) { lecteur = new BufferedReader(new InputStreamReader(this.connexion.getErrorStream())); }
-
-        String buffer;
-        StringBuilder resultat = new StringBuilder();
-
-        while((buffer = lecteur.readLine()) != null) resultat.append(buffer);
-
-        lecteur.close();
-        return resultat.toString();
+    protected String recevoir() throws IOException, InterruptedException {
+        return HttpClient.newHttpClient().send(this.requete, HttpResponse.BodyHandlers.ofString()).body();
     }
 
     /**
