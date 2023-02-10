@@ -18,5 +18,11 @@ public interface IRequeteHTTP {
      * @return Le code de la requête HTTP.
      * @throws RequeteHTTPException  Si la requête n'a pas été envoyé.
      */
-    int geStatut() throws RequeteHTTPException;
+    int getStatut() throws RequeteHTTPException;
+
+    /**
+     * Récupère la méthode de la requête.
+     * @return La méthode de la requête.
+     */
+    String getMethode();
 }

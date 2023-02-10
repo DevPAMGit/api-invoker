@@ -108,11 +108,16 @@ public abstract class RequeteHTTP implements IRequeteHTTP {
     public abstract byte[] getCorps() throws RequeteHTTPException;
 
     @Override
-    public int geStatut() throws RequeteHTTPException {
+    public int getStatut() throws RequeteHTTPException {
         if(this.requete == null)
             throw new RequeteHTTPException("La requête n'a pas été envoyé à l'hôte. En conséquence aucun statut n'est" +
                     " disponible.");
 
         return this.codeStatut;
+    }
+
+    @Override
+    public String getMethode() {
+        return this.methode.nom;
     }
 }
