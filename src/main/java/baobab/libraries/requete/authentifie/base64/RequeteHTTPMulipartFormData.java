@@ -4,8 +4,6 @@ import baobab.libraries.requete.noyau.RequeteHTTPException;
 import org.apache.commons.lang3.ArrayUtils;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.AbstractMap;
-
 /**
  * Requête permettant d'effectuer des requêtes HTTP multipart/form-data avec une authentication Basic encodée en Base 64
  * en méthode POST.
@@ -63,9 +61,8 @@ public abstract class RequeteHTTPMulipartFormData extends RequeteHTTPPostAuthBas
      */
     private byte[] getDonneeBytes(String cle, byte[] valeur) {
         String buffer = String.format("--%s%s", SEPARATEUR, SAUT) +
-                String.format("Content-Disposition: form-data; name=\"%s\"%s", cle, SAUT);
+                String.format("Content-Disposition: form-data; name=\"%s\"%s", cle, SAUT) +
                 String.format("Content-Type: %s%s%s", "application/octet-stream", SAUT, SAUT);
-                //String.format("Content-Transfer-Encoding: binary%s%s", SAUT, SAUT);
 
         byte[] resultat = ArrayUtils.addAll(buffer.getBytes(), valeur);
         resultat = ArrayUtils.addAll(resultat,  SAUT.getBytes());
