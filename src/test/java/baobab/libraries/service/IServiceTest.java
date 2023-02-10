@@ -23,9 +23,7 @@ public class IServiceTest {
      * @throws RequeteHTTPException  Si une exception spécifique à l'utilisation de la librairie a lieu.
      */
     @Test
-    public void testerService()
-            throws IOException, RequeteHTTPException, NoSuchFieldException, IllegalAccessException,
-            InterruptedException {
+    public void testerService() throws IOException, RequeteHTTPException, InterruptedException {
         // Test d'un service en utilisant une méthode de type multipart/form-data.
         JSONObject resultatMultipart1 = this.obtenirResultat(new MultipartFormDataServiceComposantDonnee1(
                 VariablesStatiques.HOTE, VariablesStatiques.LOGIN, VariablesStatiques.MOT_DE_PASSE));
