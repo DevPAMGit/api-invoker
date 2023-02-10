@@ -12,4 +12,11 @@ public interface IRequeteHTTP {
      * @throws RequeteHTTPException Si une exception spécifique à l'utilisation de la librairie a lieu.
      */
     String appeler() throws IOException, RequeteHTTPException, InterruptedException;
+
+    /**
+     * Récupère la valeur du code statut de la requête HTTP.
+     * @return Le code de la requête HTTP.
+     * @throws RequeteHTTPException  Si la requête n'a pas été envoyé.
+     */
+    int geStatut() throws RequeteHTTPException;
 }

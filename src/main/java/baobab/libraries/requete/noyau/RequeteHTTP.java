@@ -32,6 +32,11 @@ public abstract class RequeteHTTP implements IRequeteHTTP {
     protected final HashMap<String, Object> donnees;
 
     /**
+     * Le code statut retour de la requête HTTP.
+     */
+    private int codeStatut;
+
+    /**
      * Initialise une nouvelle instance de la classe {@link RequeteHTTP}.
      * @param methode La méthode de la requête HTTP.
      * @param url     L'URL sur laquelle se connecter.
@@ -74,7 +79,16 @@ public abstract class RequeteHTTP implements IRequeteHTTP {
      * @throws IOException Si une exception d'entrée/sortie se produit.
      */
     protected String recevoir() throws IOException, InterruptedException {
-        return HttpClient.newHttpClient().send(this.requete, HttpResponse.BodyHandlers.ofString()).body();
+        HttpResponse<String> reponse =  HttpClient.newHttpClient().send(this.requete, HttpResponse.BodyHandlers.ofString());
+        this.codeStatut = reponse.statusCode();
+        return reponse.body();
+    }
+
+
+    @Override
+    public String appeler() throws IOException, RequeteHTTPException, InterruptedException {
+        this.envoyer();
+        return this.recevoir();
     }
 
     /**
@@ -92,4 +106,13 @@ public abstract class RequeteHTTP implements IRequeteHTTP {
      * @throws RequeteHTTPException Si une exception spécifique à l'utilisation de la librairie a lieu.
      */
     public abstract byte[] getCorps() throws RequeteHTTPException;
+
+    @Override
+    public int geStatut() throws RequeteHTTPException {
+        if(this.requete == null)
+            throw new RequeteHTTPException("La requête n'a pas été envoyé à l'hôte. En conséquence aucun statut n'est" +
+                    " disponible.");
+
+        return this.codeStatut;
+    }
 }
