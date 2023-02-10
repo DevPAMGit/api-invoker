@@ -1,7 +1,6 @@
 package baobab.libraries.service.composant;
 
 import baobab.libraries.requete.authentifie.base64.RequeteHTTPMulipartFormData;
-import baobab.libraries.requete.noyau.RequeteHTTPException;
 import baobab.libraries.service.IService;
 import org.jetbrains.annotations.NotNull;
 
@@ -37,12 +36,6 @@ public class MultipartFormDataServiceComposantFichier extends RequeteHTTPMulipar
         this.addDonnee("file_name", "file_to_transfert.pdf");
         this.addDonnee("file_content", (this.getClass().getClassLoader().
                 getResourceAsStream("file_to_transfert.pdf")).readAllBytes());
-    }
-
-    @Override
-    public String appeler() throws IOException, RequeteHTTPException, InterruptedException {
-        this.envoyer();
-        return this.recevoir();
     }
 
     @Override

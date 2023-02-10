@@ -5,10 +5,6 @@ import baobab.libraries.requete.noyau.RequeteHTTPException;
 import baobab.libraries.service.IService;
 import org.jetbrains.annotations.NotNull;
 
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.ProtocolException;
-
 /**
  * Classe composante de test implémentant une requête de methode PATCH.
  */
@@ -39,12 +35,6 @@ public class PatchServiceComposant extends RequeteHTTPPatchAuthBasic implements 
         this.addDonnee("input_01", "valeur01");
         this.addDonnee("input_02", "valeur02");
         this.addDonnee("input_date_01", "08/02/2023");
-    }
-
-    @Override
-    public String appeler() throws IOException, RequeteHTTPException, InterruptedException {
-        this.envoyer();
-        return this.recevoir();
     }
 
     @Override

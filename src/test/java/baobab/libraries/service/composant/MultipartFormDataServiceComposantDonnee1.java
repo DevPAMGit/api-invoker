@@ -36,13 +36,6 @@ public class MultipartFormDataServiceComposantDonnee1 extends RequeteHTTPMulipar
     }
 
     @Override
-    public String appeler() throws IOException, RequeteHTTPException, InterruptedException {
-        this.envoyer();
-        String result = this.recevoir();
-        return result;
-    }
-
-    @Override
     public String getRessource() {
         return this.ressource;
     }

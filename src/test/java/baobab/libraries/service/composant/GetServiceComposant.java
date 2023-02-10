@@ -39,21 +39,9 @@ public class GetServiceComposant extends RequeteHTTPGetAuthBasic implements ISer
      *                               mais que la NetPermission "allowHttpTrace" n'est pas accordée.
      * @throws IOException           Si une exception d'E/S se produit.
      */
-    public GetServiceComposant(@NotNull String url, @NotNull String login, @NotNull String motDePasse, String idDossier)
-            throws IOException, NoSuchFieldException, IllegalAccessException {
+    public GetServiceComposant(@NotNull String url, @NotNull String login, @NotNull String motDePasse, String idDossier)  {
         super(String.format(RESOURCE_FORMATEE, url, VariablesStatiques.ENTITE, idDossier), login, motDePasse);
         this.ressource = String.format(RESOURCE_FORMATEE, url, VariablesStatiques.ENTITE, idDossier);
-    }
-
-    @Override
-    public String appeler() throws IOException, RequeteHTTPException, InterruptedException {
-        this.envoyer();
-        return this.recevoir();
-    }
-
-    @Override
-    public byte[] getCorps() throws RequeteHTTPException {
-        return null;
     }
 
     @Override

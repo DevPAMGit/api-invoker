@@ -1,11 +1,9 @@
 package baobab.libraries.service.composant;
 
 import baobab.libraries.requete.authentifie.base64.RequeteHTTPMulipartFormData;
-import baobab.libraries.requete.noyau.RequeteHTTPException;
 import baobab.libraries.service.IService;
 import org.jetbrains.annotations.NotNull;
 
-import java.io.IOException;
 import java.util.Date;
 
 /**
@@ -34,12 +32,6 @@ public class MultipartFormDataServiceComposantDonnee2 extends RequeteHTTPMulipar
         super(String.format(RESOURCE_FORMATEE, url, VariablesStatiques.ENTITE), login, motDePasse);
         this.ressource = String.format(RESOURCE_FORMATEE, url, VariablesStatiques.ENTITE);
         this.addDonnee("input_date_01", new Date());
-    }
-
-    @Override
-    public String appeler() throws IOException, RequeteHTTPException, InterruptedException {
-        this.envoyer();
-        return this.recevoir();
     }
 
     @Override
