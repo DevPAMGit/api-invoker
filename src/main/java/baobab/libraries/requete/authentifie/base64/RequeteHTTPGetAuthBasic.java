@@ -1,6 +1,7 @@
 package baobab.libraries.requete.authentifie.base64;
 
 import baobab.libraries.requete.noyau.MethodeHTTP;
+import baobab.libraries.requete.noyau.RequeteHTTPException;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -16,5 +17,10 @@ public abstract class RequeteHTTPGetAuthBasic extends RequeteHTTPAuthBasic {
      */
     public RequeteHTTPGetAuthBasic(@NotNull String url, @NotNull String login, @NotNull String motDePasse) {
         super(MethodeHTTP.GET, url, login, motDePasse);
+    }
+
+    @Override
+    public byte[] getCorps() throws RequeteHTTPException {
+        return null;
     }
 }
