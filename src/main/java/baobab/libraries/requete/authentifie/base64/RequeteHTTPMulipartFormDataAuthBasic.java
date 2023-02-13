@@ -8,7 +8,7 @@ import org.jetbrains.annotations.NotNull;
  * Requête permettant d'effectuer des requêtes HTTP multipart/form-data avec une authentication Basic encodée en Base 64
  * en méthode POST.
  */
-public abstract class RequeteHTTPMulipartFormData extends RequeteHTTPPostAuthBasic {
+public abstract class RequeteHTTPMulipartFormDataAuthBasic extends RequeteHTTPPostAuthBasic {
     /**
      * Le séparateur d'argument de la requête.
      */
@@ -20,13 +20,13 @@ public abstract class RequeteHTTPMulipartFormData extends RequeteHTTPPostAuthBas
     protected final static String SAUT = "\r\n";
 
     /**
-     * Initialise une nouvelle instance de la classe {@link RequeteHTTPMulipartFormData}.
+     * Initialise une nouvelle instance de la classe {@link RequeteHTTPMulipartFormDataAuthBasic}.
      *
      * @param url        L'URL sur laquelle se connecter.
      * @param login      Le login d'authentification.
      * @param motDePasse Le mot de passe du login.
      */
-    public RequeteHTTPMulipartFormData(@NotNull String url, @NotNull String login, @NotNull String motDePasse)  {
+    public RequeteHTTPMulipartFormDataAuthBasic(@NotNull String url, @NotNull String login, @NotNull String motDePasse)  {
         super(url, login, motDePasse);
         this.setEnTete("Content-Type", String.format("multipart/form-data; boundary=%s", SEPARATEUR));
     }

@@ -30,16 +30,9 @@ public class GetServiceComposant extends RequeteHTTPGetAuthBasic implements ISer
      * @param login      Le login d'authentification.
      * @param motDePasse Le mot de passe du login.
      * @param idDossier  L'identifiant du dossier à consulter.
-     * @throws MalformedURLException Si aucun protocole n'est spécifié, ou si un protocole inconnu est trouvé,
-     *                               ou si la spécification est nulle, ou si l'URL analysée ne respecte pas
-     *                               la syntaxe spécifique du protocole associé.
-     * @throws ProtocolException     Si la méthode ne peut pas être réinitialisée ou si la méthode demandée
-     *                               n'est pas valide pour HTTP.
-     * @throws SecurityException     Si un gestionnaire de sécurité est défini et que la méthode est "TRACE",
-     *                               mais que la NetPermission "allowHttpTrace" n'est pas accordée.
-     * @throws IOException           Si une exception d'E/S se produit.
      */
-    public GetServiceComposant(@NotNull String url, @NotNull String login, @NotNull String motDePasse, String idDossier)  {
+    public GetServiceComposant(@NotNull String url, @NotNull String login, @NotNull String motDePasse, String idDossier)
+    {
         super(String.format(RESOURCE_FORMATEE, url, VariablesStatiques.ENTITE, idDossier), login, motDePasse);
         this.ressource = String.format(RESOURCE_FORMATEE, url, VariablesStatiques.ENTITE, idDossier);
     }

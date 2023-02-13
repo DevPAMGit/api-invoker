@@ -1,6 +1,6 @@
 package baobab.libraries.service.composant;
 
-import baobab.libraries.requete.authentifie.base64.RequeteHTTPMulipartFormData;
+import baobab.libraries.requete.authentifie.base64.RequeteHTTPMulipartFormDataAuthBasic;
 import baobab.libraries.service.IService;
 import org.jetbrains.annotations.NotNull;
 
@@ -9,7 +9,7 @@ import java.io.IOException;
 /**
  * Classe composante de test implémentant une requête de méthode POST Multipart/form-data.
  */
-public class MultipartFormDataServiceComposantFichier extends RequeteHTTPMulipartFormData implements IService {
+public class MultipartFormDataServiceComposantFichierAuthBasic extends RequeteHTTPMulipartFormDataAuthBasic implements IService {
     /**
      * La resource à consulter sur l'hôte.
      */
@@ -21,14 +21,14 @@ public class MultipartFormDataServiceComposantFichier extends RequeteHTTPMulipar
     private final String ressource;
 
     /**
-     * Initialise une nouvelle instance de la classe {@link RequeteHTTPMulipartFormData}.
+     * Initialise une nouvelle instance de la classe {@link RequeteHTTPMulipartFormDataAuthBasic}.
      *
      * @param url        L'URL sur laquelle se connecter.
      * @param login      Le login d'authentification.
      * @param motDePasse Le mot de passe du login.
      * @param idDossier  L'identifiant du dossier à modifier.
      */
-    public MultipartFormDataServiceComposantFichier(
+    public MultipartFormDataServiceComposantFichierAuthBasic(
             @NotNull String url, @NotNull String login, @NotNull String motDePasse, String idDossier)
             throws IOException {
         super(String.format(RESOURCE_FORMATEE, url, VariablesStatiques.ENTITE, idDossier), login, motDePasse);

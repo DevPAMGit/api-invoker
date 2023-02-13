@@ -65,9 +65,11 @@ public abstract class RequeteHTTP implements IRequeteHTTP {
         // Récupération du corps de la requête.
         byte[] corps = this.getCorps();
 
-        // Écriture du corps de la requête.
+        // Écriture de la requête.
         if(corps != null && corps.length > 0)
             this.connexion = this.connexion.method(this.methode.nom, HttpRequest.BodyPublishers.ofByteArray(corps));
+        else
+            this.connexion = this.connexion.method(this.methode.nom, HttpRequest.BodyPublishers.noBody());
 
         // Envoi/Execution de la requête.
         this.requete = this.connexion.build();
@@ -75,8 +77,9 @@ public abstract class RequeteHTTP implements IRequeteHTTP {
 
     /**
      * Méthode permettant de récupérer des données retournées par l'hôte au format {@link String}.
-     * @return             Les données retournées par l'hôte au format {@link String}.
-     * @throws IOException Si une exception d'entrée/sortie se produit.
+     * @return                          Les données retournées par l'hôte au format {@link String}.
+     * @throws IOException              Si une exception d'entrée/sortie se produit.
+     * @throws InterruptedException     Si l'opération est interrompue.
      */
     protected String recevoir() throws IOException, InterruptedException {
         HttpResponse<String> reponse =  HttpClient.newHttpClient().send(this.requete, HttpResponse.BodyHandlers.ofString());
