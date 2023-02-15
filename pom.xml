@@ -17,6 +17,14 @@
     <maven.compiler.target>1.7</maven.compiler.target>
   </properties>
 
+  <distributionManagement>
+    <repository>
+      <id>github</id>
+      <name>GitHub DevPAMGit Apache Maven Packages</name>
+      <url>https://maven.pkg.github.com/DevPAMGit/api-invoker</url>
+    </repository>
+  </distributionManagement>
+
   <dependencies>
 
     <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
